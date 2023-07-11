@@ -8,16 +8,10 @@
 import SwiftUI
 import Supabase
 struct SignInView: View {
-   // @Binding var appUser: AppUser?
-  //  @StateObject var viewModel = SignInVM()
     @Environment(\.dismiss) var dismiss
     @ObservedObject var signInVM : SignInVM
     @StateObject var viewModel = ToDoVM()
-    @State var text1 = ""
-    @State var text2 = ""
     @State var isActive = false
-    @State var isPress = false
-    @State var isPress1 = false
     init(nav: Nav){
         signInVM = SignInVM(nav: nav)
     }
@@ -29,7 +23,6 @@ struct SignInView: View {
             Text("Welcome back")
                 .foregroundColor(.black)
                 .fontWeight(.bold)
-//                .font(.system(size: 25))
                 .font(.custom("Roboto-Black", size: 25))
             Text("Fill in your email and password to continue")
                 .foregroundColor(.gray)
@@ -37,7 +30,7 @@ struct SignInView: View {
             Text("Email Address")
                 .foregroundColor(.gray)
                 .font(.system(size: 15))
-            TextField("",text:$text1)
+            TextField("",text:$signInVM.signInModel.email)
                 .frame(width:342, height: 44)
                 .background(Color.white)
                 .cornerRadius(6)
@@ -45,14 +38,15 @@ struct SignInView: View {
                 .background(Color.gray)
                 .cornerRadius(6)
                 .autocorrectionDisabled(true)
-                .alert(isPresented: $isPress){
+                .alert(isPresented: $signInVM.isPress){
                     Alert(title: Text("Ошибка"),message: Text("Поля для ввода пусты"), dismissButton: .default(Text("OK")))}
             Text("Password")
                 .foregroundColor(.gray)
                 .font(.system(size: 15))
+             
             ZStack{
                 if isActive == false{
-                    SecureField("",text:$text2)
+                    SecureField("",text:$signInVM.signInModel.password)
                         .frame(width:342, height: 44)
                         .background(Color.white)
                         .cornerRadius(6)
@@ -62,7 +56,7 @@ struct SignInView: View {
                         .autocorrectionDisabled(true)
                 }
                 else{
-                    TextField("",text:$text2)
+                    TextField("",text:$signInVM.signInModel.password)
                         .frame(width:342, height: 44)
                         .background(Color.white)
                         .cornerRadius(6)
@@ -82,39 +76,16 @@ struct SignInView: View {
             }
             
             Button(action:{
-                
+                print(signInVM.signInModel.email)
                 Task{
-                    
-                    
-                    if text1 == "" && text2 == ""{
-                        self.isPress = true
-                    }
-                    else{
                         do{
                             
-                            if signInVM.isFormValid(email: text1, password: text2){
-                                try await viewModel.fetchItems(for: signInVM.nav.user.uid)
-                                dismiss()
-                                
-                                try await viewModel.createItems(text: "Right now", uid: signInVM.nav.user.uid)
-                                dismiss()
-                                print("12345678")
-                                let appUser = try await signInVM.SignInWithEmail(email: text1, password: text2)
+                            let appUser = try await signInVM.SignInWithEmail(email: signInVM.signInModel.email, password: signInVM.signInModel.password)
                                 print("appUser =  \(appUser)")
-                                
-                                
                                 signInVM.nav.user.uid = appUser.uid
                                 signInVM.nav.user.email = appUser.email
                                 signInVM.nav.currentView = "onBoarding"
                                 
-                            }
-                            else{
-                                self.isPress1 = true
-                            }
-                            //                                self.appUser = appUser
-                            //
-                            //                                print("appUser =  \(self.appUser)")
-                            //
                         }
                         
                         catch{
@@ -122,7 +93,6 @@ struct SignInView: View {
                         }
                     }
                     }
-                }
             
                    
             
@@ -135,7 +105,7 @@ struct SignInView: View {
                         .cornerRadius(10)
                         .padding(.top, 20)
                 }
-                .alert(isPresented: $isPress1){
+                .alert(isPresented: $signInVM.isPress1){
                     Alert(title: Text("Ошибка"),message: Text("Неверная форма ввода логина или пароля"), dismissButton: .default(Text("OK")))}
             }
         }

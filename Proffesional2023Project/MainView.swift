@@ -20,7 +20,7 @@ struct MainView: View {
             case "signIn": SignInView(nav: nav)
 //            } else{
 //                    }
-            default: SignUpView(nav: nav)
+            default: SignInView(nav: nav)
                 //OnBoardingView(nav: nav)
             }
         }.onAppear{

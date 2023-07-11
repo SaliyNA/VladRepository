@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84B8FF072A5DC9CA00667225 /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B8FF062A5DC9CA00667225 /* SignInModel.swift */; };
 		84BEF43D2A4ABDF1000D48A2 /* Proffesional2023ProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEF43C2A4ABDF1000D48A2 /* Proffesional2023ProjectApp.swift */; };
 		84BEF43F2A4ABDF1000D48A2 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEF43E2A4ABDF1000D48A2 /* OnBoardingView.swift */; };
 		84BEF4412A4ABDF3000D48A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84BEF4402A4ABDF3000D48A2 /* Assets.xcassets */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84B8FF062A5DC9CA00667225 /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
 		84BEF4392A4ABDF1000D48A2 /* Proffesional2023Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Proffesional2023Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84BEF43C2A4ABDF1000D48A2 /* Proffesional2023ProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proffesional2023ProjectApp.swift; sourceTree = "<group>"; };
 		84BEF43E2A4ABDF1000D48A2 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
@@ -155,12 +157,12 @@
 				84DA20A42A5A8EF1001595C9 /* Custom Font */,
 				84BEF43C2A4ABDF1000D48A2 /* Proffesional2023ProjectApp.swift */,
 				84BEF4F72A4BF56B000D48A2 /* MainView.swift */,
+				84BEF4F32A4BF48D000D48A2 /* Nav.swift */,
 				84DA20812A591595001595C9 /* AppUser.swift */,
 				84DA20882A593167001595C9 /* DataBaseManager.swift */,
 				84DA20862A59169D001595C9 /* AuthMng.swift */,
 				84DA208A2A5A8615001595C9 /* InfoVM.swift */,
 				84BEF4EE2A4BF318000D48A2 /* OnBoardingGroup */,
-				84BEF4F32A4BF48D000D48A2 /* Nav.swift */,
 				84BEF4FF2A4D52C5000D48A2 /* SignInView */,
 				84BEF4ED2A4BF30B000D48A2 /* SignUpGroup */,
 				84BEF4662A4ABE8F000D48A2 /* Splash.storyboard */,
@@ -220,6 +222,7 @@
 				84BEF4FB2A4C099D000D48A2 /* SignInView.swift */,
 				84DA20A82A5A9021001595C9 /* Roboto */,
 				84BEF4FD2A4C0ABD000D48A2 /* SignInVM.swift */,
+				84B8FF062A5DC9CA00667225 /* SignInModel.swift */,
 			);
 			path = SignInView;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				84BEF4F42A4BF48D000D48A2 /* Nav.swift in Sources */,
 				84BEF4F62A4BF4D2000D48A2 /* OnBoardingModel.swift in Sources */,
 				84DA20892A593167001595C9 /* DataBaseManager.swift in Sources */,
+				84B8FF072A5DC9CA00667225 /* SignInModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
