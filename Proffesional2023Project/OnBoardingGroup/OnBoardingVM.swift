@@ -8,6 +8,10 @@
 import Foundation
 import SwiftUI
 
+
+// viewmodel к экрану onboarding
+// Салий Влад, 11 июля 2023
+// массив изображений и текстов для экранов и функционал кнопок next, skip, signup
 class OnBoardingVM : ObservableObject{
     @Published var nav: Nav
     @Published var items: [OnBoardingModel] = [

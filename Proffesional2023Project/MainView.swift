@@ -14,14 +14,11 @@ struct MainView: View {
         VStack{
             switch nav.currentView {
             case "onBoarding" : OnBoardingView(nav: nav)
-                
             case "signUp": SignUpView(nav: nav)
-//            if let appUser = appUser{
             case "signIn": SignInView(nav: nav)
-//            } else{
-//                    }
+            case "home": HomeView(nav: nav)
+            case "infoView": InfoView(nav: nav)
             default: SignInView(nav: nav)
-                //OnBoardingView(nav: nav)
             }
         }.onAppear{
             Task{

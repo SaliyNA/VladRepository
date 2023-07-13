@@ -97,8 +97,8 @@ struct SignUpView: View {
                         do{
                             let appUser = try await signUpVM.registerNewUserWithEmail(email: text3, password: text4)
                                 print("appUser =  \(appUser)")
-                            signUpVM.nav.user.uid = appUser.uid
-                            signUpVM.nav.user.email = appUser.email
+//                            signUpVM.nav.user.uid = appUser.uid
+//                            signUpVM.nav.user.email = appUser.email
                                 signUpVM.nav.currentView = "signIn"
                                 
 //                                self.appUser = appUser

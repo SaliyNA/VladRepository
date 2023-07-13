@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct Proffesional2023ProjectApp: App {
+   
     var body: some Scene {
         WindowGroup {
             MainView()
+                
         }
     }
 }

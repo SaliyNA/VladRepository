@@ -14,6 +14,7 @@ struct User{
     var fullName: String = ""
 }
 
+
 class Nav : ObservableObject{
     @Published var currentView : String = "onBoarding"
     @Published var user = User()

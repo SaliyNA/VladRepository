@@ -11,12 +11,14 @@ import Foundation
 
 
 
-
+// ViewModel для экрана SignIn
+// Салий Влад, 11 июля 2023
+// проверка валидности введенных значений и вызов функций авторизации и авторизации из репозитория
 class SignInVM: ObservableObject{
     @Published var nav : Nav
     @Published var isPress1: Bool = false
     @Published var isPress: Bool = false
-    @Published var signInModel = SignInModel(email: "", password: "")
+    @Published var signInModel = SignInModel(email: "saliy.vlad.jr@gmail.com", password: "12345678")
     init(nav: Nav){
         self.nav = nav
     }
@@ -46,12 +48,18 @@ class SignInVM: ObservableObject{
     func SignInWithEmail(email:String, password: String) async throws -> AppUser{
         if isFormValid(email: email, password: password){
             let user  = try await AuthManager.shared.signInWithEmail(email: email, password: password)
+            nav.currentView = "infoView"
+           //сохраняем данные текущего пользователя
+            nav.user.uid = user.uid
+            nav.user.email = user.email
             return user
+            
         }else{
             print("sign in form is invalid")
             throw NSError()
         }
     }
+//    func()
 }
 extension String {
     func isValidEmail()->Bool{

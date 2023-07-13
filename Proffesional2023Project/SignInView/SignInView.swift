@@ -9,62 +9,64 @@ import SwiftUI
 import Supabase
 struct SignInView: View {
     @Environment(\.dismiss) var dismiss
+    
+    @State var user = AppUser(uid: "", email: nil)
+    
     @ObservedObject var signInVM : SignInVM
-    @StateObject var viewModel = ToDoVM()
+    @State var isUser = false
     @State var isActive = false
     init(nav: Nav){
         signInVM = SignInVM(nav: nav)
     }
     var body: some View {
-        VStack(alignment: .leading){
-            ForEach(viewModel.todos, id:\.text){ todo in
-                Text(todo.text)
-            }
-            Text("Welcome back")
-                .foregroundColor(.black)
-                .fontWeight(.bold)
-                .font(.custom("Roboto-Black", size: 25))
-            Text("Fill in your email and password to continue")
-                .foregroundColor(.gray)
-                .font(.system(size: 15))
-            Text("Email Address")
-                .foregroundColor(.gray)
-                .font(.system(size: 15))
-            TextField("",text:$signInVM.signInModel.email)
-                .frame(width:342, height: 44)
-                .background(Color.white)
-                .cornerRadius(6)
-                .padding(1)
-                .background(Color.gray)
-                .cornerRadius(6)
-                .autocorrectionDisabled(true)
-                .alert(isPresented: $signInVM.isPress){
-                    Alert(title: Text("Ошибка"),message: Text("Поля для ввода пусты"), dismissButton: .default(Text("OK")))}
-            Text("Password")
-                .foregroundColor(.gray)
-                .font(.system(size: 15))
-             
-            ZStack{
-                if isActive == false{
-                    SecureField("",text:$signInVM.signInModel.password)
-                        .frame(width:342, height: 44)
-                        .background(Color.white)
-                        .cornerRadius(6)
-                        .padding(1)
-                        .background(Color.gray)
-                        .cornerRadius(6)
-                        .autocorrectionDisabled(true)
-                }
-                else{
-                    TextField("",text:$signInVM.signInModel.password)
-                        .frame(width:342, height: 44)
-                        .background(Color.white)
-                        .cornerRadius(6)
-                        .padding(1)
-                        .background(Color.gray)
-                        .cornerRadius(6)
-                        .autocorrectionDisabled(true)
-                }
+        NavigationView{
+            VStack(alignment: .leading){
+                Text("Welcome back")
+                    .foregroundColor(.black)
+                // .fontWeight(.bold)
+                //                .font(.custom("Roboto-Italic", size: 25))
+                    .font(.custom("Roboto-BoldItalic", size: 25))
+                Text("Fill in your email and password to continue")
+                    .foregroundColor(.gray)
+                    .font(.system(size: 15))
+                Text("Email Address")
+                    .foregroundColor(.gray)
+                    .font(.system(size: 15))
+                TextField("",text:$signInVM.signInModel.email)
+                    .frame(width:342, height: 44)
+                    .background(Color.white)
+                    .cornerRadius(6)
+                    .padding(1)
+                    .background(Color.gray)
+                    .cornerRadius(6)
+                    .autocorrectionDisabled(true)
+                    .alert(isPresented: $signInVM.isPress){
+                        Alert(title: Text("Ошибка"),message: Text("Поля для ввода пусты"), dismissButton: .default(Text("OK")))}
+                Text("Password")
+                    .foregroundColor(.gray)
+                    .font(.system(size: 15))
+                
+                ZStack{
+                    if isActive == false{
+                        SecureField("",text:$signInVM.signInModel.password)
+                            .frame(width:342, height: 44)
+                            .background(Color.white)
+                            .cornerRadius(6)
+                            .padding(1)
+                            .background(Color.gray)
+                            .cornerRadius(6)
+                            .autocorrectionDisabled(true)
+                    }
+                    else{
+                        TextField("",text:$signInVM.signInModel.password)
+                            .frame(width:342, height: 44)
+                            .background(Color.white)
+                            .cornerRadius(6)
+                            .padding(1)
+                            .background(Color.gray)
+                            .cornerRadius(6)
+                            .autocorrectionDisabled(true)
+                    }
                     Button(action:{
                         self.isActive.toggle()
                     }){
@@ -72,30 +74,26 @@ struct SignInView: View {
                             .resizable()
                             .frame(width: 14,height:14)
                     }.padding(.leading, 300)
+                    
+                }
                 
-            }
-            
-            Button(action:{
-                print(signInVM.signInModel.email)
-                Task{
+                Button(action:{
+                    Task{
                         do{
-                            
                             let appUser = try await signInVM.SignInWithEmail(email: signInVM.signInModel.email, password: signInVM.signInModel.password)
-                                print("appUser =  \(appUser)")
-                                signInVM.nav.user.uid = appUser.uid
-                                signInVM.nav.user.email = appUser.email
-                                signInVM.nav.currentView = "onBoarding"
-                                
+                            //                                print("appUser =  \(appUser)")
+//                                                            signInVM.nav.user.uid = appUser.uid
+//                                                            signInVM.nav.user.email = appUser.email
                         }
                         
                         catch{
                             print("error signing in")
                         }
                     }
-                    }
-            
-                   
-            
+                }
+                       
+                       
+                       
                 ){
                     Text("Sign In")
                         .foregroundColor(.white)
@@ -110,6 +108,6 @@ struct SignInView: View {
             }
         }
     }
-
-
-
+    
+    
+}
